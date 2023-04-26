@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  typescript:
+    container_name: typescript_essentials
+    build: .
+    working_dir: /code
+    ports:
+      - 8000:8000
+      - 4600:4600
+    volumes:
+      - .:/code
+    stdin_open: true
+    tty: true
+    command: >
+      sh -c "cd webapp && npm start"
+
+# sh -c "cd webapp && npx webpack serve"
+
