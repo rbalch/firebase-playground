@@ -20,7 +20,7 @@ export class HtmlDisplay {
         this.containerElem.appendChild(this.getFirebaseLoginWidget());
     }
 
-    getFirebaseLoginWidget(): HTMLElement {
+    getFirebaseLoginWidget(showButton: boolean = true): HTMLElement {
         return <div id="firebaseui-auth-container">
             <button onclick={this.showFirebaseLoginWidget}>Load</button>
         </div>

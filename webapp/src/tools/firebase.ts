@@ -8,6 +8,7 @@ import 'firebaseui/dist/firebaseui.css';
 export class Firebase {
     private app: FirebaseApp;
     private auth: Auth;
+    private docId: string = 'firebaseui-auth-container';
 
     constructor() {
         this.app = initializeApp(firebaseConfig);
@@ -47,12 +48,13 @@ export class Firebase {
             ],
           }
     
-          ui.start('#firebaseui-auth-container', config);
+          ui.start("#"+this.docId, config);
     }
 
     _signInSuccessWithAuthResult(authResult: any): boolean {
         authResult.user.getIdToken().then((idToken: string) => {
-            console.log("idToken: " + idToken);
+            const elem = document.getElementById(this.docId);
+            elem.innerHTML = "idToken: " + idToken;
         });
         return false;
     }
