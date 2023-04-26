@@ -9,6 +9,7 @@ export class Firebase {
     private app: FirebaseApp;
     private auth: Auth;
     private docId: string = 'firebaseui-auth-container';
+    private user: User;
 
     constructor() {
         this.app = initializeApp(firebaseConfig);
@@ -16,6 +17,7 @@ export class Firebase {
 
         onAuthStateChanged(this.auth, (user) => {
             if (user) {
+                this.user = user;
                 console.log("onAuthStateChanged: User is signed in");
             } else {
                 console.log("onAuthStateChanged: User is signed out");
@@ -51,7 +53,12 @@ export class Firebase {
           ui.start("#"+this.docId, config);
     }
 
+    logout() {
+        signOut(this.auth).then().catch(err => console.error(err));
+      }
+
     _signInSuccessWithAuthResult(authResult: any): boolean {
+        this.user = authResult.user;
         authResult.user.getIdToken().then((idToken: string) => {
             const elem = document.getElementById(this.docId);
             elem.innerHTML = "idToken: " + idToken;

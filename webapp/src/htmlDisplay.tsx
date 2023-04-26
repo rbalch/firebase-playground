@@ -24,6 +24,7 @@ export class HtmlDisplay {
         return <div id="firebaseui-auth-container">
             <button onclick={this.showFirebaseLoginWidget}>Load</button>
         </div>
+        // return <div id="firebaseui-auth-container"></div>
     }
 
     showFirebaseLoginWidget = (): void => {
